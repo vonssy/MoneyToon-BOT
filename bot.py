@@ -238,6 +238,9 @@ class MoneyToon:
         for attempt in range(retries):
             try:
                 response = self.session.get(url, headers=self.headers, timeout=20)
+                if response.status_code == 401:
+                      return None
+
                 response.raise_for_status()
                 return response.json()["data"]
             except (requests.RequestException, requests.Timeout, ValueError) as e:
@@ -998,7 +1001,7 @@ class MoneyToon:
                 time.sleep(1)
 
                 egg = self.egg_count(new_token if 'new_token' in locals() else token)
-                if egg > 0:
+                if egg and egg > 0:
                     while egg > 0:
                         open = self.egg_open(new_token if 'new_token' in locals() else token)
                         if open:
