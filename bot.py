@@ -1001,7 +1001,16 @@ class MoneyToon:
                 time.sleep(1)
 
                 egg = self.egg_count(new_token if 'new_token' in locals() else token)
-                if egg and egg > 0:
+                if egg is not None and egg > 0:
+                    self.log(
+                        f"{Fore.MAGENTA + Style.BRIGHT}[ Egg{Style.RESET_ALL}"
+                        f"{Fore.GREEN + Style.BRIGHT} Is Prepared to Open {Style.RESET_ALL}"
+                        f"{Fore.MAGENTA + Style.BRIGHT}] [ Count{Style.RESET_ALL}"
+                        f"{Fore.WHITE + Style.BRIGHT} {egg} Egg {Style.RESET_ALL}"
+                        f"{Fore.MAGENTA + Style.BRIGHT}]{Style.RESET_ALL}"
+                    )
+                    time.sleep(1)
+
                     while egg > 0:
                         open = self.egg_open(new_token if 'new_token' in locals() else token)
                         if open:
